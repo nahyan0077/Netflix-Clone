@@ -1,0 +1,130 @@
+.row{
+    margin-left: 20px;
+    color: #fff;
+}
+
+.posters{
+    display: flex;
+    padding: 20px;
+    overflow-x: scroll;
+    overflow-y:hidden ;
+    gap: 10px;
+}
+
+.posters::-webkit-scrollbar{
+    display: none;
+}
+.posters1{
+    display: flex;
+    padding: 20px;
+    overflow-x: scroll;
+    overflow-y:hidden ;
+    gap: 10px;
+}
+
+.posters1::-webkit-scrollbar{
+    display: none;
+}
+.posters2{
+    display: flex;
+    padding: 20px;
+    overflow-x: scroll;
+    overflow-y:hidden ;
+    gap: 10px;
+}
+
+.posters2::-webkit-scrollbar{
+    display: none;
+}
+
+
+.poster{
+    max-height: 250px;
+    margin-right: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.poster:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+.scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    z-index: 1;
+    margin-top: 470px;
+    background-color: rgba(0, 0, 0, 0.5); 
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); 
+  }
+
+.scroll-arrow1 {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    z-index: 1;
+    margin-top: 800px;
+    background-color: rgba(0, 0, 0, 0.5); 
+    padding: 10px;
+    border-radius: 50%; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); 
+  }
+.scroll-arrow2 {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    z-index: 1;
+    margin-top: 1120px;
+    background-color: rgba(0, 0, 0, 0.5); 
+    padding: 10px;
+    border-radius: 50%; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); 
+  }
+.scroll-arrow3 {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    z-index: 1;
+    margin-top: 1450px;
+    background-color: rgba(0, 0, 0, 0.5); 
+    padding: 10px;
+    border-radius: 50%; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); 
+  }
+.scroll-arrow4 {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    z-index: 1;
+    margin-top: 1750px;
+    background-color: rgba(0, 0, 0, 0.5); 
+    padding: 10px;
+    border-radius: 50%; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); 
+  }
+  
+  .left {
+    left: 0;
+  }
+  
+  .right {
+    right: 0;
+  }
+  

@@ -1,0 +1,51 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 30px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  transition: background-color 0.3s ease;
+  z-index: 10;
+}
+
+.scrolled {
+  background-color: black;
+}
+
+.logo {
+  position: fixed;
+  left: 80px;
+  width: 120px;
+}
+
+.avatar {
+  position: fixed;
+  right: 100px;
+  width: 40px;
+  margin-top: -5px;
+}
+.searchIcon{
+    position: absolute;
+    margin-right: 40px;
+    right: 180px;
+    cursor: pointer;
+}
+.searchIcon:hover{
+  color: red;
+}
+
+.navText{
+  display: flex;
+  margin-left: 250px;
+  gap: 30px;
+  color: white;
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.navTxt:hover {
+  color: red;
+  cursor: pointer;
+}
