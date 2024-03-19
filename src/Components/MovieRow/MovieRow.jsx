@@ -3,6 +3,11 @@ import "./MovieRow.css";
 import axios from "../../axios";
 import { API_KEY } from "../../Constants/Constants";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import YouTube from "react-youtube";
+import StarRatings from "react-star-ratings";
+import { FaPlay } from "react-icons/fa";
+import { FaThumbsUp } from "react-icons/fa6";
+import { FaPlus } from "react-icons/fa6";
 
 const baseImageUrl = "https://image.tmdb.org/t/p/original";
 
@@ -12,12 +17,13 @@ export const MovieRow = () => {
   const [topRated, setToprated] = useState([]);
   const [action, setAction] = useState([]);
   const [animated, setAnimated] = useState([]);
+  const [urlId, setUrlId] = useState("");
   const scrollRefs = {
     originals: useRef(null),
     trending: useRef(null),
     topRated: useRef(null),
     action: useRef(null),
-    animated: useRef(null)
+    animated: useRef(null),
   };
 
   useEffect(() => {
@@ -70,7 +76,6 @@ export const MovieRow = () => {
       });
   }, []);
 
-
   const scroll = (ref, direction) => {
     const scrollAmount = direction === "left" ? -300 : 300;
     if (ref.current) {
@@ -81,7 +86,30 @@ export const MovieRow = () => {
     }
   };
 
+  const opts = {
+    height: "390",
+    width: "100%",
+    playerVars: {
+      autoplay: 1,
+    },
+  };
 
+  const handleMovieTrailer = (movieId) => {
+    console.log(movieId);
+    axios
+      .get(`/movie/${movieId}/videos?api_key=${API_KEY}`)
+      .then((res) => {
+        console.log("movies", res.data.results[0]);
+        if (res.data.results.length !== 0) {
+          setUrlId(res.data.results[0]);
+        } else {
+          console.log("Array is empty");
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  };
 
   return (
     <div className="row">
@@ -91,6 +119,7 @@ export const MovieRow = () => {
           return (
             <div>
               <img
+                onClick={() => handleMovieTrailer(data.id)}
                 key={data.id}
                 className="poster"
                 alt="poster"
@@ -99,12 +128,30 @@ export const MovieRow = () => {
             </div>
           );
         })}
-        <FaArrowLeft className="scroll-arrow left" onClick={() => scroll(scrollRefs.originals, "left")} />
-        <FaArrowRight className="scroll-arrow right" onClick={() => scroll(scrollRefs.originals, "right")} />
+        {urlId && (
+          <YouTube
+            style={{
+              position: "absolute",
+              marginLeft: "500px",
+              width: "800px",
+              height: "600px",
+            }}
+            videoId={urlId.key}
+            opts={opts}
+          />
+        )}
+        <FaArrowLeft
+          className="scroll-arrow left"
+          onClick={() => scroll(scrollRefs.originals, "left")}
+        />
+        <FaArrowRight
+          className="scroll-arrow right"
+          onClick={() => scroll(scrollRefs.originals, "right")}
+        />
       </div>
 
       <h2>Trending Now</h2>
-      <div className="posters1" ref={scrollRefs.trending} >
+      <div className="posters1" ref={scrollRefs.trending}>
         {movies.map((data) => {
           return (
             <div>
@@ -117,30 +164,66 @@ export const MovieRow = () => {
             </div>
           );
         })}
-        <FaArrowLeft className="scroll-arrow1 left" onClick={() => scroll(scrollRefs.trending, "left")} />
-        <FaArrowRight className="scroll-arrow1 right" onClick={() => scroll(scrollRefs.trending, "right")} />
+        <FaArrowLeft
+          className="scroll-arrow1 left"
+          onClick={() => scroll(scrollRefs.trending, "left")}
+        />
+        <FaArrowRight
+          className="scroll-arrow1 right"
+          onClick={() => scroll(scrollRefs.trending, "right")}
+        />
       </div>
 
       <h2>Animated</h2>
-      <div className="posters2" ref={scrollRefs.animated} >
+      <div className="posters2" ref={scrollRefs.animated}>
         {animated.map((data) => {
           return (
-            <div>
+            <div className="poster-wrapper" key={data.id}>
               <img
                 key={data.id}
                 className="poster"
                 alt="poster"
                 src={baseImageUrl + data.backdrop_path}
               />
+              <div className="overlay">
+                <h3 style={{position:'absolute',left:'35px',marginBottom:'-80px'}} > {data.original_title} </h3>
+                <div className="additional-buttons">
+                  <div className="icon">
+                    <FaPlay />
+                  </div>
+                  <div className="icon">
+                    <FaPlus />
+                  </div>
+                  <div className="icon">
+                    <FaThumbsUp />
+                  </div>
+                </div>
+                <div className="star-ratings" style={{marginTop:'10px', marginLeft:'-72px'}} >
+                  <StarRatings
+                    rating={data.vote_average / 2}
+                    starRatedColor="red"
+                    numberOfStars={5}
+                    name="rating"
+                    starDimension="0.8rem"
+                    starSpacing="0.2rem"
+                  />
+                </div>
+              </div>
             </div>
           );
         })}
-        <FaArrowLeft className="scroll-arrow2 left" onClick={() => scroll(scrollRefs.animated, "left")} />
-        <FaArrowRight className="scroll-arrow2 right" onClick={() => scroll(scrollRefs.animated, "right")} />
+        <FaArrowLeft
+          className="scroll-arrow2 left"
+          onClick={() => scroll(scrollRefs.animated, "left")}
+        />
+        <FaArrowRight
+          className="scroll-arrow2 right"
+          onClick={() => scroll(scrollRefs.animated, "right")}
+        />
       </div>
 
       <h2>Top Rated</h2>
-      <div className="posters2" ref={scrollRefs.topRated} >
+      <div className="posters2" ref={scrollRefs.topRated}>
         {topRated.map((data) => {
           return (
             <div>
@@ -153,12 +236,18 @@ export const MovieRow = () => {
             </div>
           );
         })}
-        <FaArrowLeft className="scroll-arrow3 left" onClick={() => scroll(scrollRefs.topRated, "left")} />
-        <FaArrowRight className="scroll-arrow3 right" onClick={() => scroll(scrollRefs.topRated, "right")} />
+        <FaArrowLeft
+          className="scroll-arrow3 left"
+          onClick={() => scroll(scrollRefs.topRated, "left")}
+        />
+        <FaArrowRight
+          className="scroll-arrow3 right"
+          onClick={() => scroll(scrollRefs.topRated, "right")}
+        />
       </div>
 
       <h2>Action Movies</h2>
-      <div className="posters2" ref={scrollRefs.action} >
+      <div className="posters2" ref={scrollRefs.action}>
         {action.map((data) => {
           return (
             <div>
@@ -171,8 +260,14 @@ export const MovieRow = () => {
             </div>
           );
         })}
-        <FaArrowLeft className="scroll-arrow4 left" onClick={() => scroll(scrollRefs.action, "left")} />
-        <FaArrowRight className="scroll-arrow4 right" onClick={() => scroll(scrollRefs.action, "right")} />
+        <FaArrowLeft
+          className="scroll-arrow4 left"
+          onClick={() => scroll(scrollRefs.action, "left")}
+        />
+        <FaArrowRight
+          className="scroll-arrow4 right"
+          onClick={() => scroll(scrollRefs.action, "right")}
+        />
       </div>
     </div>
   );

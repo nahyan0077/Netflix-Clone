@@ -22,14 +22,14 @@
 
 .avatar {
   position: fixed;
-  right: 100px;
+  right: 130px;
   width: 40px;
   margin-top: -5px;
 }
 .searchIcon{
     position: absolute;
     margin-right: 40px;
-    right: 180px;
+    right: 200px;
     cursor: pointer;
 }
 .searchIcon:hover{
@@ -48,4 +48,34 @@
 .navTxt:hover {
   color: red;
   cursor: pointer;
+}
+
+
+.avatar-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 380px;
+  background-color: #000000;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 100px;
+  margin-top: 10px;
+}
+
+.dropdown button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown button:hover {
+  color: #ff0000;
 }

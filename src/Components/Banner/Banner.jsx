@@ -32,7 +32,7 @@ export const Banner = () => {
               <div className=" hidden sm:flex justify-center sm:justify-start ml-2">
                 {banner.vote_average ? (
                   <h1 className="flex text-white text-xl drop-shadow-lg 2xl:text-lg">
-                    <div className="-mt-1">
+                    <div className="-mt-1"  >
                       <StarRatings
                         rating={banner.vote_average / 2}
                         starRatedColor="red"

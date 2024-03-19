@@ -127,4 +127,45 @@
   .right {
     right: 0;
   }
+
+
+
+  .poster-wrapper {
+    position: relative;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; 
+  }
   
+  .overlay {
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background: rgba(0, 0, 0, 0.5);
+    display: none; 
+    justify-content: flex-start;
+    align-items: center;
+    transition: opacity 0.3s ease;
+  }
+
+  .poster-wrapper:hover {
+    transform: scale(1.1); 
+  }
+  
+  .poster-wrapper:hover .overlay {
+    display: flex; 
+  }
+
+  .additional-buttons{
+    display: flex;
+    gap: 10px;
+    margin-left: 40px;
+    margin-top: 150px;
+  }
+
+
+

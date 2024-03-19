@@ -1,11 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './Navbar.css'
 import { CiSearch } from "react-icons/ci";
+import { getAuth, signOut } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from "../../Store/AuthContext";
 
 
 function Navbar() {
   
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const navigate = useNavigate()
+  const {user} = useContext(AuthContext)
+
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +31,24 @@ function Navbar() {
     };
   }, []);
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prev) => !prev);
+  };
+
+  const handleSignOut = () => {
+    const confirmation = window.confirm('Are you sure you want to logout?');
+    if (confirmation) {
+      const auth = getAuth();
+      signOut(auth)
+        .then(() => {
+          navigate('/');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }
+
   return (
 
     <div className={`navbar ${isScrolled ? 'scrolled' : ''}`} >
@@ -35,7 +61,21 @@ function Navbar() {
           <p className='navTxt' >Liked</p>
           <p className='navTxt' >My List</p>
         </div>
-        <img className='avatar' src="https://i.pinimg.com/originals/0d/dc/ca/0ddccae723d85a703b798a5e682c23c1.png" alt="" />
+          
+        <div className='avatar-wrapper'>
+        <img
+          className='avatar'
+          src='https://i.pinimg.com/originals/0d/dc/ca/0ddccae723d85a703b798a5e682c23c1.png'
+          alt=''
+          onClick={toggleDropdown}
+        />
+        {isDropdownOpen && (
+          <div className='dropdown'>
+            <button onClick={handleSignOut}>Sign Out</button>
+          </div>
+        )}
+      </div>
+      { user ? <span style={{color:'white',marginRight:'80px'}} > {user.displayName} </span> : null }
     </div>
   )
 }
