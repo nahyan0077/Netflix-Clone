@@ -5,7 +5,7 @@ import { API_KEY } from "../../Constants/Constants";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import YouTube from "react-youtube";
 import StarRatings from "react-star-ratings";
-import { FaPlay } from "react-icons/fa";
+import { FaPlay, FaTimes } from "react-icons/fa";
 import { FaThumbsUp } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
 
@@ -110,6 +110,9 @@ export const MovieRow = () => {
         console.error("Error fetching data:", error);
       });
   };
+  const closePopup = () => {
+    setUrlId(""); 
+  };
 
   return (
     <div className="row">
@@ -129,6 +132,7 @@ export const MovieRow = () => {
           );
         })}
         {urlId && (
+          <>
           <YouTube
             style={{
               position: "absolute",
@@ -138,7 +142,10 @@ export const MovieRow = () => {
             }}
             videoId={urlId.key}
             opts={opts}
-          />
+            />
+            <FaTimes style={{position:'absolute',right:'362px'}} className="close-button" onClick={closePopup} />
+            <p>sdfgsdfg</p>
+            </>
         )}
         <FaArrowLeft
           className="scroll-arrow left"

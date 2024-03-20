@@ -12,6 +12,7 @@ function SignIn() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false);
+  const [loginError,setError] = useState('')
 
   const handleSubmit = (e) =>{
     e.preventDefault()
@@ -27,6 +28,8 @@ function SignIn() {
         }, 2000);  
       })
       .catch((error) => {
+        setIsLoading(false)
+        setError(error.message)
         console.log("the error is.....",error);
       });
   }
@@ -41,6 +44,7 @@ function SignIn() {
         <div className="signin__container">
           <h1>Sign In</h1>
           <br />
+          <p style={{color:'red'}} > {loginError} </p>
           <form  onSubmit={handleSubmit} >
             <input
               value={email}
