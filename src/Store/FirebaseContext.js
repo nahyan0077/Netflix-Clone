@@ -1,5 +1,5 @@
 import {createContext } from 'react'
-import {firestore} from '../firebase/Config.js'
+import firestore from '../firebase/Config.js'
 
 
 export const FirebaseContext = createContext(null)
