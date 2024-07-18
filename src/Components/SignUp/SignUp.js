@@ -1,12 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, {  useState } from "react";
 import "./SignUp.css";
 import { Link } from "react-router-dom";
 import netflixLogo from "../../Images/netflixLogo.png";
-import {Formik, Form, Field, useFormik, ErrorMessage} from 'formik'
-import { FirebaseContext } from "../../Store/FirebaseContext";
+import {Formik, Form, Field, ErrorMessage} from 'formik'
 import {signUpValidationSchema} from '../../FormValidationSchema/signupValidation'
 import { getAuth, createUserWithEmailAndPassword, updateProfile  } from "firebase/auth";
-import {  collection, addDoc, doc ,getFirestore } from 'firebase/firestore/lite';
+import {  collection, addDoc ,getFirestore } from 'firebase/firestore/lite';
 import { useNavigate } from 'react-router-dom';
 import LoadingPopup from '../Loading/LoadingPopup';
 
@@ -16,7 +15,6 @@ import LoadingPopup from '../Loading/LoadingPopup';
 
 function SignUp() {
 
-  const {firestore} = useContext(FirebaseContext)
   const [isLoading, setIsLoading] = useState(false);
 
 
